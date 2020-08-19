@@ -6,6 +6,7 @@ import AppError from '@shared/errors/AppError';
 import uploadConfig from '@config/upload';
 import router from './routes';
 import '@shared/infra/typeorm';
+import '@shared/Container/index';
 
 const server = express();
 server.use(cors());

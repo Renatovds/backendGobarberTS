@@ -3,7 +3,8 @@ import { sign } from 'jsonwebtoken';
 import User from '@modules/users/infra/typeorm/entities/User';
 import authConfig from '@config/auth';
 import AppError from '@shared/errors/AppError';
-import IUsersRepository from '../infra/repositories/IUsersRepository';
+import { inject, injectable } from 'tsyringe';
+import IUsersRepository from '../repositories/IUsersRepository';
 
 interface IRequest {
   email: string;
@@ -13,12 +14,15 @@ interface IResponse {
   user: User;
   token: string;
 }
-
+@injectable()
 class AuthSessionService {
-  constructor(private userRepository: IUsersRepository) {}
+  constructor(
+    @inject('UserRepository')
+    private usersRepository: IUsersRepository,
+  ) {}
 
   public async execute({ email, password }: IRequest): Promise<IResponse> {
-    const user = await this.userRepository.findByEmail(email);
+    const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError('Email/Password wrong', 401);
