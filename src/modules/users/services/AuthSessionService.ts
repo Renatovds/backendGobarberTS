@@ -17,7 +17,7 @@ interface IResponse {
 @injectable()
 class AuthSessionService {
   constructor(
-    @inject('UserRepository')
+    @inject('UsersRepository')
     private usersRepository: IUsersRepository,
   ) {}
 
