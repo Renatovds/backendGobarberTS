@@ -13,7 +13,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use(router);
-server.use('/files', express.static(uploadConfig.fileDirectory));
+server.use('/files', express.static(uploadConfig.uploadsFolder));
 router.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
     if (err instanceof AppError) {

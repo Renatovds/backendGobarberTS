@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import multer from 'multer';
-import CreateUserService from '@modules/users/services/CreateUserService';
 import uploadConfig from '@config/upload';
 import AuthenticationMiddleware from '@modules/users/infra/http/middleware/AuthenticationMiddleware';
 import UsersController from '../Controllers/UsersController';
