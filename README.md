@@ -59,7 +59,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
  
  Redis
  
- #### Crie um arquivo .env na raiz do projeto seguindo suas configurações locais, seguindo o formato do arquivo .env.example 
+ #### Crie um arquivo ".env" na raiz do projeto, seguindo o formato do arquivo ".env.example" e alterando para suas configurações locais.
 ---
 
 Desenvolvido por Renato Veiga da Silva 🤟
