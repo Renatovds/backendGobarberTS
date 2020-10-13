@@ -5,13 +5,19 @@ import { isEqual, getMonth, getYear, getDate } from 'date-fns';
 import Appointment from '../../infra/typeorm/entities/Appointment';
 import IFindAllInMonthFromProviderDTO from '../../dtos/IFindAllInMonthFromProviderDTO';
 import IFindAllInDayFromProviderDTO from '../../dtos/IFindAllInDayFromProviderDTO';
+import IFindByDateDTO from '../../dtos/IFindByDateDTO';
 
 class FakeAppointmentRepository implements IAppointmentRepository {
   private appointments: Appointment[] = [];
 
-  public async findByDate(date: Date): Promise<Appointment | undefined> {
-    const findAppointment = this.appointments.find(appointment =>
-      isEqual(appointment.date, date),
+  public async findByDate({
+    date,
+    provider_id,
+  }: IFindByDateDTO): Promise<Appointment | undefined> {
+    const findAppointment = this.appointments.find(
+      appointment =>
+        isEqual(appointment.date, date) &&
+        appointment.provider_id === provider_id,
     );
     return findAppointment;
   }

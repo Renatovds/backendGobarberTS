@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import AppError from '@shared/errors/AppError';
 import FakeStorageProvider from '@shared/Container/providers/StorageProvider/fakes/FakeStorageProvider';
+import FakeCacheProvider from '@shared/Container/providers/CacheProvider/fakes/FakeCacheProvider';
 import CreateUserService from './CreateUserService';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeHashProvider from '../providers/fakes/FakeHashProvider';
@@ -11,14 +12,17 @@ let createUserService: CreateUserService;
 let fakeHashProvider: FakeHashProvider;
 let fakestorageProvider: FakeStorageProvider;
 let updateAvatarService: UpdateAvatarService;
+let fakeCacheProvider: FakeCacheProvider;
 describe('UpdateAvatarService', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeHashProvider = new FakeHashProvider();
     fakestorageProvider = new FakeStorageProvider();
+    fakeCacheProvider = new FakeCacheProvider();
     createUserService = new CreateUserService(
       fakeUsersRepository,
       fakeHashProvider,
+      fakeCacheProvider,
     );
     updateAvatarService = new UpdateAvatarService(
       fakeUsersRepository,

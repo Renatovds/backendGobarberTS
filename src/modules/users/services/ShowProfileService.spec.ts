@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import AppError from '@shared/errors/AppError';
+import FakeCacheProvider from '@shared/Container/providers/CacheProvider/fakes/FakeCacheProvider';
 import CreateUserService from './CreateUserService';
 import ShowProfileService from './ShowProfileService';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
@@ -9,14 +10,17 @@ let fakeUsersRepository: FakeUsersRepository;
 let createUserService: CreateUserService;
 let fakeHashProvider: FakeHashProvider;
 let showProfileService: ShowProfileService;
+let fakeCacheProvider: FakeCacheProvider;
 describe('ShowProfileService', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeHashProvider = new FakeHashProvider();
+    fakeCacheProvider = new FakeCacheProvider();
     showProfileService = new ShowProfileService(fakeUsersRepository);
     createUserService = new CreateUserService(
       fakeUsersRepository,
       fakeHashProvider,
+      fakeCacheProvider,
     );
   });
 

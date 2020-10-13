@@ -3,6 +3,7 @@ import User from '@modules/users/infra/typeorm/entities/User';
 import authConfig from '@config/auth';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IHashProvider from '../providers/models/IHashProvider';
 
@@ -43,7 +44,7 @@ class AuthSessionService {
       expiresIn: authConfig.jwt.expiresIn,
     });
 
-    return { user, token };
+    return { user: classToClass(user), token };
   }
 }
 

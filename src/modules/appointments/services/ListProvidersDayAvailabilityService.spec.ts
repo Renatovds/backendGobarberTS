@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-import AppError from '@shared/errors/AppError';
 import ListProviderDayAvailabilityService from './ListProviderDayAvailabilityService';
 import FakeCreateAppointmentsRepository from '../repositories/fakes/FakeCreateAppointmentsRepository';
 
@@ -16,10 +15,12 @@ describe('ListProviderDayAvailabilityService', () => {
   it('should be able to show the provider day availability', async () => {
     await fakeCreateAppointmentsRepository.create({
       provider_id: 'user_id',
+      user_id: 'user_id',
       date: new Date(2020, 4, 20, 12, 0, 0),
     });
     await fakeCreateAppointmentsRepository.create({
       provider_id: 'user_id',
+      user_id: 'user_id',
       date: new Date(2020, 4, 20, 14, 0, 0),
     });
     jest.spyOn(Date, 'now').mockImplementationOnce(() => {

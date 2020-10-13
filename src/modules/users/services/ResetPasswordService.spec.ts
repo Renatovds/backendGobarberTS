@@ -30,7 +30,11 @@ describe('ResetPasswordService', () => {
     });
     const { token } = await fakeUsersTokensRepository.generate(user.id);
 
-    await resetPasswordService.execute({ token, password: '123123' });
+    await resetPasswordService.execute({
+      token,
+      password: '123123',
+      password_confirmation: '123123',
+    });
 
     const updatedUser = await fakeUsersRepository.findById(user.id);
 
@@ -50,6 +54,7 @@ describe('ResetPasswordService', () => {
       resetPasswordService.execute({
         token: 'non-exist',
         password: '123456',
+        password_confirmation: '123123',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -61,6 +66,7 @@ describe('ResetPasswordService', () => {
       resetPasswordService.execute({
         token,
         password: '123456',
+        password_confirmation: '123123',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -79,7 +85,11 @@ describe('ResetPasswordService', () => {
     });
 
     await expect(
-      resetPasswordService.execute({ token, password: '123123' }),
+      resetPasswordService.execute({
+        token,
+        password: '123123',
+        password_confirmation: '123123',
+      }),
     ).rejects.toBeInstanceOf(AppError);
   });
 });

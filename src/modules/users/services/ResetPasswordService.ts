@@ -1,4 +1,3 @@
-import User from '@modules/users/infra/typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import { addHours, isAfter } from 'date-fns';
@@ -9,6 +8,7 @@ import IHashProvider from '../providers/models/IHashProvider';
 interface IRequest {
   token: string;
   password: string;
+  password_confirmation: string;
 }
 @injectable()
 class ResetPasswordService {
@@ -21,7 +21,14 @@ class ResetPasswordService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({ token, password }: IRequest): Promise<void> {
+  public async execute({
+    token,
+    password,
+    password_confirmation,
+  }: IRequest): Promise<void> {
+    if (password !== password_confirmation) {
+      throw new AppError('Password and password_confirmation does not match.');
+    }
     const userToken = await this.usersTokensRepository.findByToken(token);
     if (!userToken) {
       throw new AppError('User token does not exist');

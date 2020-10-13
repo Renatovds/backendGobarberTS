@@ -1,6 +1,6 @@
 export default {
   jwt: {
-    secret: 'bandoleiros',
+    secret: process.env.APP_SECRET || 'default',
     expiresIn: '1d',
   },
 };
