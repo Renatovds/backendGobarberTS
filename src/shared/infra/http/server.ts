@@ -13,15 +13,15 @@ import '@shared/infra/typeorm';
 import '@shared/Container/index';
 
 const server = express();
-server.use(rateLimiter);
+
 server.use(cors());
 
 server.use(express.json());
 
-server.use(routes);
 server.use(errors());
 server.use('/files', express.static(uploadConfig.uploadsFolder));
-
+server.use(rateLimiter);
+server.use(routes);
 server.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
     if (err instanceof AppError) {

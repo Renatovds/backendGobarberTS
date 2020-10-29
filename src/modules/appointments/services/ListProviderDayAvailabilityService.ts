@@ -28,7 +28,7 @@ class ListProviderDayAvailabilityService {
     const appointments = await this.appointmentsRepository.findAllDaysAvailableAppointments(
       { provider_id, month, year, day },
     );
-    console.log(appointments);
+
     const startHour = 8;
     const eachHourArray = Array.from({ length: 10 }, (_, index) => {
       return startHour + index;

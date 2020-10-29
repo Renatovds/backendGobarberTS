@@ -6,7 +6,7 @@ import ProfileController from '../Controllers/ProfileController';
 const profilesRouter = Router();
 const profilesController = new ProfileController();
 profilesRouter.use(AuthenticationMiddleware);
-profilesRouter.post(
+profilesRouter.put(
   '/',
   celebrate({
     [Segments.BODY]: {
